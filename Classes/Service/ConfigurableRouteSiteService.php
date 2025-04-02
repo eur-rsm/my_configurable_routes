@@ -2,6 +2,7 @@
 
 namespace Serfhos\MyConfigurableRoutes\Service;
 
+use Doctrine\DBAL\ParameterType;
 use Serfhos\MyConfigurableRoutes\Domain\DataTransferObject\ConfigurableRouteEnhancer;
 use Serfhos\MyConfigurableRoutes\Routing\PluginConfigurableByPageEnhancer;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -33,7 +34,7 @@ class ConfigurableRouteSiteService implements SingletonInterface
             $type = $this->getTypeForPage($page);
 
             return $type === $enhancer->getKey();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return false;
         }
     }
@@ -58,7 +59,7 @@ class ConfigurableRouteSiteService implements SingletonInterface
                     ->where(
                         $queryBuilder->expr()->eq(
                             'uid',
-                            $queryBuilder->createNamedParameter($identifier, \PDO::PARAM_INT)
+                            $queryBuilder->createNamedParameter($identifier, ParameterType::INTEGER)
                         )
                     )
                     ->executeQuery();
