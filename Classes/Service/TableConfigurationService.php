@@ -34,6 +34,7 @@ class TableConfigurationService
                 $parameters['items'][] = [
                     'label' => $enhancer->getLabel(),
                     'value' => $enhancer->getKey(),
+                    // @extensionScannerIgnoreLine
                     'icon' => $enhancer->getIcon(),
                 ];
             }
